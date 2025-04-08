@@ -21,7 +21,7 @@ A reverse proxy is a server that sits between clients and backend application se
 
 ## System Architecture
 
-![System Architecture](./imgs/architecture/draw-io-diagram.png)
+![System Architecture](./imgs/architecture/nginx-reverse-proxy.png)
 
 If the diagram doesn't render properly, here's a text representation of the architecture:
 
@@ -80,7 +80,7 @@ Tested direct access to both services through their respective ports to ensure t
 - Python app: http://13.247.213.192:8080
 - Node.js app: http://13.247.213.192:3000
 
-![Direct Port Access](./imgs/testing/direct-port-access.png)
+![Direct Port Access](./imgs/testing/direct-access/)
 
 ### 4. Security Enhancement
 
@@ -95,7 +95,7 @@ sudo ufw status
 
 Verified that direct access to the services was no longer possible:
 
-![Blocked Ports](./imgs/testing/blocked-ports.png)
+![Blocked Ports](./imgs/testing/blocked-ports/)
 
 ### 5. NGINX Installation
 
@@ -213,7 +213,7 @@ Verified that both applications were accessible through the NGINX reverse proxy:
 - Python application: http://13.247.213.192/pythonapp/
 - Node.js application: http://13.247.213.192/nodejsapp/
 
-![NGINX Access](./imgs/testing/nginx-access.png)
+![NGINX Access](./imgs/testing/nginx-access/)
 
 ## Key Configuration Elements Explained
 
