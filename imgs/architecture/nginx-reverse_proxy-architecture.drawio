@@ -1,0 +1,38 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/26.2.2 Chrome/134.0.6998.178 Electron/35.1.2 Safari/537.36" version="26.2.2" pages="2">
+  <diagram name="NGINX Multi-Service Architecture" id="a1">
+    <mxGraphModel dx="568" dy="453" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="6" style="endArrow=block;html=1;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="220" y="200" as="sourcePoint" />
+            <mxPoint x="280" y="200" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7" value="GET /pythonapp/" style="endArrow=block;html=1;" parent="1" edge="1">
+          <mxGeometry x="-0.217" y="21" relative="1" as="geometry">
+            <mxPoint x="460" y="174.28571428571433" as="sourcePoint" />
+            <mxPoint x="500" y="162.8571428571429" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="8" value="GET /nodejsapp/" style="endArrow=block;html=1;" parent="1" edge="1">
+          <mxGeometry x="-0.217" y="-21" relative="1" as="geometry">
+            <mxPoint x="460" y="225.71428571428578" as="sourcePoint" />
+            <mxPoint x="500" y="237.14285714285722" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="p74M25ali5q1-EqUQOYn" name="Page-2">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
