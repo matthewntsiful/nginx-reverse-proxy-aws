@@ -1,5 +1,29 @@
 # NGINX Reverse Proxy Implementation on AWS
 
+## Technologies Used
+
+![NGINX](https://img.shields.io/badge/nginx-%23009639.svg?style=for-the-badge&logo=nginx&logoColor=white)
+![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
+![Ubuntu](https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
+![Shell Script](https://img.shields.io/badge/shell_script-%23121011.svg?style=for-the-badge&logo=gnu-bash&logoColor=white)
+
+## Table of Contents
+
+- [Project Overview](#project-overview)
+- [What is a Reverse Proxy?](#what-is-a-reverse-proxy)
+- [System Architecture](#system-architecture)
+- [Prerequisites](#prerequisites)
+- [Implementation Steps](#implementation-steps)
+- [Key Configuration Elements Explained](#key-configuration-elements-explained)
+- [Lessons Learned](#lessons-learned)
+- [Future Improvements](#future-improvements)
+- [Troubleshooting](#troubleshooting)
+- [Repository Structure](#repository-structure)
+- [License](#license)
+- [Contact Information](#contact-information)
+
 ## Project Overview
 
 This project demonstrates the implementation of an NGINX reverse proxy server on AWS to route traffic to multiple backend services. The reverse proxy provides a unified access point for two different applications:
@@ -46,6 +70,22 @@ If the diagram doesn't render properly, here's a text representation of the arch
         └─────────────────┘   └─────────────────┘
 ```
 
+## Prerequisites
+
+- AWS account with EC2 permissions
+- Basic knowledge of Linux commands
+- Understanding of web servers and networking concepts
+- SSH client for connecting to the EC2 instance
+
+## Quick Start
+
+1. Launch an EC2 instance with Ubuntu Server
+2. Clone this repository: `git clone https://github.com/matthewntsiful/nginx-reverse-proxy-aws.git`
+3. Run the setup script: `cd nginx-reverse-proxy-aws && bash scripts/setup.sh`
+4. Access the applications at:
+   - Python app: http://your-server-ip/pythonapp/
+   - Node.js app: http://your-server-ip/nodejsapp/
+
 ## Implementation Steps
 
 ### 1. AWS Setup
@@ -77,10 +117,10 @@ mkdir service2
 ### 3. Direct Access Testing
 
 Tested direct access to both services through their respective ports to ensure they were functioning correctly:
-- Python app: http://13.247.213.192:8080
-- Node.js app: http://13.247.213.192:3000
+- Python app: http://your-server-ip:8080
+- Node.js app: http://your-server-ip:3000
 
-![Direct Port Access](./imgs/testing/direct-access/)
+![Direct Port Access](./imgs/testing/direct-access/python-access.png)
 
 ### 4. Security Enhancement
 
@@ -95,7 +135,7 @@ sudo ufw status
 
 Verified that direct access to the services was no longer possible:
 
-![Blocked Ports](./imgs/testing/blocked-ports/)
+![Blocked Ports](./imgs/testing/blocked-ports/firewall-blocked-nodejs.png)
 
 ### 5. NGINX Installation
 
@@ -120,7 +160,7 @@ server {
     # Listen on port 80 for HTTP traffic
     listen 80;
     # Set the server name to the IP address
-    server_name 13.247.213.192;
+    server_name your-server-ip;
     
     # Configuration block for Python application
     # Handles all requests under /pythonapp/ path
@@ -210,10 +250,10 @@ sudo systemctl restart nginx
 ### 8. Testing the Reverse Proxy
 
 Verified that both applications were accessible through the NGINX reverse proxy:
-- Python application: http://13.247.213.192/pythonapp/
-- Node.js application: http://13.247.213.192/nodejsapp/
+- Python application: http://your-server-ip/pythonapp/
+- Node.js application: http://your-server-ip/nodejsapp/
 
-![NGINX Access](./imgs/testing/nginx-access/)
+![NGINX Access](./imgs/testing/nginx-access/nginx-access.png)
 
 ## Key Configuration Elements Explained
 
@@ -264,11 +304,16 @@ Possible enhancements for this project:
 4. **Caching**: Adding caching for static content
 5. **Automated Deployment**: Creating scripts for automated setup and configuration
 
-## Conclusion
+## Troubleshooting
 
-This project demonstrates a practical implementation of an NGINX reverse proxy on AWS, providing a secure and unified way to access multiple backend services. By hiding the backend services behind the reverse proxy and implementing proper routing, we've created a more secure and user-friendly system.
+### 502 Bad Gateway Error
+- Check if backend services are running: `ps aux | grep python` and `ps aux | grep node`
+- Verify NGINX configuration: `sudo nginx -t`
+- Check NGINX error logs: `sudo tail -f /var/log/nginx/error.log`
 
-![AI-Generated Architecture](./imgs/architecture/ai-generated-arch.png)
+### Cannot Access Backend Services
+- Verify firewall settings: `sudo ufw status`
+- Check if services are listening on correct ports: `sudo netstat -tulpn | grep LISTEN`
 
 ## Repository Structure
 
@@ -277,17 +322,39 @@ This project demonstrates a practical implementation of an NGINX reverse proxy o
 ├── README.md                 # This documentation file
 ├── imgs/                     # Directory for all images
 │   ├── architecture/         # System architecture diagrams
-│   │   ├── draw-io-diagram.png
-│   │   └── ai-generated-arch.png
+│   │   └── nginx-reverse-proxy.png
 │   └── testing/              # Testing screenshots
-│       ├── direct-port-access.png
-│       ├── blocked-ports.png
-│       └── nginx-access.png
-├── nginx/
-│   └── reverse-proxy         # NGINX configuration file
+│       ├── direct-access/
+│       │   ├── nodejs-access.png
+│       │   └── python-access.png
+│       ├── blocked-ports/
+│       │   ├── firewall-blocked-nodejs.png
+│       │   └── firewall-blocked-python.png
+│       └── nginx-access/
+│           ├── nginx-access.png
+│           ├── nodejsapp-service.png
+│           └── pythonapp-service.png
+├── nginx/                    # NGINX configuration files
+│   └── reverse_proxy.conf
 ├── apps/
 │   ├── python-app/           # Python application code
 │   └── nodejs-app/           # Node.js application code
 └── scripts/
-    └── firewall-rules.sh     # Firewall configuration
+    └── setup.sh              # Setup script for automated deployment
 ```
+
+## Conclusion
+
+This project demonstrates a practical implementation of an NGINX reverse proxy on AWS, providing a secure and unified way to access multiple backend services. By hiding the backend services behind the reverse proxy and implementing proper routing, we've created a more secure and user-friendly system.
+
+The implementation showcases how to effectively use NGINX to manage traffic between clients and multiple backend applications, while also applying security best practices to protect the underlying services.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Contact Information
+
+For questions or contributions, please contact:
+- GitHub: [matthewntsiful](https://github.com/matthewntsiful)
+- Email: matthew.ntsiful@gmail.com
