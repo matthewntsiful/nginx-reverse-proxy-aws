@@ -49,27 +49,6 @@ A reverse proxy is a server that sits between clients and backend application se
 
 If the diagram doesn't render properly, here's a text representation of the architecture:
 
-```
-                     ┌─────────────┐
-                     │    Client   │
-                     └──────┬──────┘
-                            │
-                            ▼
-                    ┌───────────────┐
- Public Access      │     AWS EC2   │
- Port 80 ───────────►  NGINX Server │
-                    └───────┬───────┘
-                            │
-                 ┌──────────┴──────────┐
-                 │                     │
-                 ▼                     ▼
-        ┌─────────────────┐   ┌─────────────────┐
-        │  Python Server  │   │  Node.js Server │
-        │  (Port 8080)    │   │   (Port 3000)   │
-        │  [Firewalled]   │   │  [Firewalled]   │
-        └─────────────────┘   └─────────────────┘
-```
-
 ## Prerequisites
 
 - AWS account with EC2 permissions
