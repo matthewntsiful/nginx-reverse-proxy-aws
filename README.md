@@ -45,7 +45,7 @@ A reverse proxy is a server that sits between clients and backend application se
 
 ## System Architecture
 
-![System Architecture](./imgs/architecture/nginx-reverse-proxy.png)
+![System Architecture](./imgs/architecture-diagram.png)
 
 If the diagram doesn't render properly, here's a text representation of the architecture:
 
